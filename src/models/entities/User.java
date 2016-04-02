@@ -1,9 +1,18 @@
-package models;
+package models.entities;
 
 public class User {
-    public String firstname;
-    public String lastname;
-    public String image;
+    private int id;
+    private String firstname;
+    private String lastname;
+    private String image;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -32,7 +41,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-            "firstname='" + firstname + '\'' +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
             ", image='" + image + '\'' +
             '}';

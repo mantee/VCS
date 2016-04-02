@@ -1,12 +1,21 @@
-package models;
+package models.entities;
 
 import java.util.ArrayList;
 
 public class Repository {
+    private int id;
     private String title;
     private ArrayList<Commit> commits;
     private User owner;
     private String dateCreated;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -43,7 +52,8 @@ public class Repository {
     @Override
     public String toString() {
         return "Repository{" +
-            "title='" + title + '\'' +
+            "id=" + id +
+            ", title='" + title + '\'' +
             ", commits=" + commits +
             ", owner=" + owner +
             ", dateCreated='" + dateCreated + '\'' +
