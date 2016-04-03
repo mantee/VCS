@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class UserData {
-    public ArrayList<User> userDataProcess() throws FileNotFoundException {
+    public ArrayList<User> getAllUsers() throws FileNotFoundException {
         FileProcess rd = new FileProcess();
         ArrayList<String> data = rd.readData("db/users.dat");
         ArrayList<User> users= new ArrayList<User>();
@@ -30,7 +30,7 @@ public class UserData {
 
     public User findUser(int id) throws FileNotFoundException {
         UserData usersData = new UserData();
-        ArrayList<User> users = usersData.userDataProcess();
+        ArrayList<User> users = usersData.getAllUsers();
 
         boolean exist = false;
 
@@ -52,7 +52,7 @@ public class UserData {
 
     public static void main(String[] args) throws Exception {
         UserData data = new UserData();
-        ArrayList<User> allUsers = data.userDataProcess();
+        ArrayList<User> allUsers = data.getAllUsers();
 
         for (int i = 0; i < allUsers.size(); i++)
         {

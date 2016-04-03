@@ -2,15 +2,14 @@ package models.processing;
 
 import models.FileProcess;
 import models.entities.Commit;
-import models.entities.Repository;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CommitData {
-    public ArrayList<Commit> repositoryDataProcess() throws FileNotFoundException {
+    public ArrayList<Commit> getAllCommits(String repositoryName) throws FileNotFoundException {
         FileProcess rd = new FileProcess();
-        ArrayList<String> data = rd.readData("db/repositories/repository1/commits.dat");
+        ArrayList<String> data = rd.readData("db/repositories/" + repositoryName +"/commits.dat");
         ArrayList<Commit> repositories= new ArrayList<Commit>();
 
         for (String aData : data) {
@@ -34,9 +33,9 @@ public class CommitData {
         return repositories;
     }
 
-    public Commit findCommit(int id) throws FileNotFoundException {
+    public Commit findCommit(int id, String filename) throws FileNotFoundException {
         CommitData repositoriesData = new CommitData();
-        ArrayList<Commit> repositories = repositoriesData.repositoryDataProcess();
+        ArrayList<Commit> repositories = repositoriesData.getAllCommits(filename);
 
         boolean exist = false;
 
@@ -58,7 +57,7 @@ public class CommitData {
 
     public static void main(String[] args) throws Exception {
         CommitData data = new CommitData();
-        ArrayList<Commit> allCommits = data.repositoryDataProcess();
+        ArrayList<Commit> allCommits = data.getAllCommits("repository1");
 
         for (int i = 0; i < allCommits.size(); i++)
         {
@@ -66,8 +65,8 @@ public class CommitData {
         }
 
         System.out.print("\n");
-        System.out.println(data.findCommit(5));
-        System.out.println(data.findCommit(1));
-        System.out.println(data.findCommit(3));
+        System.out.println(data.findCommit(5, "repository1"));
+        System.out.println(data.findCommit(1, "repository1"));
+        System.out.println(data.findCommit(3, "repository1"));
     }
 }

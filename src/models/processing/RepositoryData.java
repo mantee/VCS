@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class RepositoryData {
-    public ArrayList<Repository> repositoryDataProcess() throws FileNotFoundException {
+    public ArrayList<Repository> getAllRepositories() throws FileNotFoundException {
         FileProcess rd = new FileProcess();
         ArrayList<String> data = rd.readData("db/repositories.dat");
         ArrayList<Repository> repositories= new ArrayList<Repository>();
@@ -32,7 +32,7 @@ public class RepositoryData {
 
     public Repository findRepository(int id) throws FileNotFoundException {
         RepositoryData repositoriesData = new RepositoryData();
-        ArrayList<Repository> repositories = repositoriesData.repositoryDataProcess();
+        ArrayList<Repository> repositories = repositoriesData.getAllRepositories();
 
         boolean exist = false;
 
@@ -54,7 +54,7 @@ public class RepositoryData {
 
     public static void main(String[] args) throws Exception {
         RepositoryData data = new RepositoryData();
-        ArrayList<Repository> allRepositories = data.repositoryDataProcess();
+        ArrayList<Repository> allRepositories = data.getAllRepositories();
 
         for (int i = 0; i < allRepositories.size(); i++)
         {
