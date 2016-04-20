@@ -2,23 +2,28 @@ package gui.starting_page;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Calendar;
+import java.util.Objects;
 
-import gui.home_page.Home;
+import gui.repository_page.CodePanel;
+import services.Clock;
 
 public class StartingFrame extends JFrame {
     private JLabel label;
     private JPanel panel;
     private JComboBox comboBox;
     private UserSelect uSelect;
-    private Home home;
+    private CodePanel home;
 
+    public StartingFrame(Clock cl) throws Exception {
 
-    public StartingFrame() {
         super("User select");
+        System.out.println(cl.getCurrentDateString());
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(500, 300));
         setLayout(new BorderLayout());
-        uSelect = new UserSelect(this);
+        uSelect = new UserSelect(this, cl);
         label = new JLabel("Welcome to our VCS");
         label.setHorizontalAlignment(JLabel.CENTER);
         label.setPreferredSize(new Dimension(500, 100));
@@ -28,5 +33,7 @@ public class StartingFrame extends JFrame {
         pack();
         setVisible(true);
     }
+
+
 }
 

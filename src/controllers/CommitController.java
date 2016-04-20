@@ -6,7 +6,7 @@ import models.processing.CommitData;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CommitsController {
+public class CommitController {
     CommitData db = new CommitData();
 
     public ArrayList<Commit> showCommitsByRepoTitle(String repositoryName) throws IOException {

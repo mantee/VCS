@@ -1,4 +1,4 @@
-package gui.home_page;
+package gui.repository_page;
 
 import java.awt.*;
 import java.io.File;
@@ -24,7 +24,6 @@ class FileSystemModel extends JPanel {
         scrollpane.getViewport().add(tree);
         add(BorderLayout.CENTER, scrollpane);
     }
-
 
     private DefaultMutableTreeNode addNodes(DefaultMutableTreeNode curTop, File dir) {
         String curPath = dir.getPath();

@@ -1,4 +1,4 @@
-package gui.home_page;
+package gui.repository_page;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 
-public class Home extends JPanel implements ActionListener {
+public class CodePanel extends JPanel implements ActionListener {
 
-    public Home() {
+    public CodePanel() {
         setBorder(BorderFactory.createEtchedBorder());
 
         FileSystemModel systemTree = new FileSystemModel(new File("user_files/Repository1"));

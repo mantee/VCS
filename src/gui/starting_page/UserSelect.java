@@ -4,10 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.text.ParseException;
+import services.Clock;
 
+import controllers.UserController;
 import gui.home_page.HomeFrame;
+import models.entities.User;
 
 public class UserSelect extends JPanel implements ActionListener {
+    private Clock cl;
     private JButton okButton;
     private JLabel label;
     private JComboBox comboBox;
@@ -16,8 +22,14 @@ public class UserSelect extends JPanel implements ActionListener {
 
     StartingFrame outerFrame;
 
-    public UserSelect(StartingFrame outerFrame) {
+
+    public UserSelect(StartingFrame outerFrame, Clock cl) throws Exception {
+        this.cl = cl;
         this.outerFrame = outerFrame;
+        UserController users = new UserController();
+
+        cl.addOneDay();
+        System.out.println(cl.getCurrentDateString());
 
         setBorder(BorderFactory.createEtchedBorder());
         label = new JLabel();
@@ -25,9 +37,11 @@ public class UserSelect extends JPanel implements ActionListener {
 
         comboBox = new JComboBox();
         final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
-        comboBoxModel.addElement("Mantė Mikulėnaitė");
-        comboBoxModel.addElement("Dominykas Stankevičius");
-        comboBoxModel.addElement("Ugnius Sinonis");
+
+        for(User user : users.getAllUsers())
+        {
+            comboBoxModel.addElement(user.getFirstname() + " " + user.getLastname());
+        }
         comboBox.setModel(comboBoxModel);
 
         okButton = new JButton("Ok");
@@ -56,12 +70,18 @@ public class UserSelect extends JPanel implements ActionListener {
             if(textListener != null) {
                 textListener.okEventOccured();
             }
-            clickedOk(selectedUser);
+            try {
+                clickedOk(selectedUser);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
-    public void clickedOk(String selectedUser) {
-        new HomeFrame(selectedUser);
+    public void clickedOk(String selectedUser) throws IOException, ParseException {
+        new HomeFrame(selectedUser, cl);
 
         outerFrame.setVisible(false);
         outerFrame.dispose();

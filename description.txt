@@ -1,0 +1,51 @@
+Description of the VCS project
+    | It will be a version control system application which will let user to
+    | upload his files, then upload new ones or modified ones and see the changes.
+    | The system will collect information about changes made at specific time.
+    | Also user will be able to restore his files to previous verions of them.
+      
+Main pages and GUI classes:
+    
+  - "Starting page" with "StartingFrame" <- "UserSelectPanel"
+    | Where you can select your user account.
+      
+
+  - "Home page" with "HomeFrame" <- "ActivitiesPanel; RepositoriesPanel"
+    | Where will be displayed all users recent activity and listed all of the repositories.
+      
+      
+  - "New repository page" with "NewRepositoryFrame" <- "NewRepositoryPanel"
+    | Where user will be able to create his own repository.
+      
+
+  - "Repository page" with "RepositoryFrame" <- "CodePanel; CommitsPanel"
+    | Where data like repository files system and list of the commits will be displayed.
+      
+
+  - "New commit page" with "NewCommitFrame" <- "NewCommitPanel"
+    | Where user will be able to create his own commit.
+      
+
+  - "File page" with "FileFrame" <- "FilePanel"
+    | Where the data of the certain file will be displayed.
+      
+
+  - "Commit page" with "CommitFrame" <- "CommitPanel"
+    | Where the data of the certain commit will be changed with all of the differences compared to the current files.
+
+Controlling classes:
+
+    Our controllers obvioulsy does not render the views, so probably, they are not even real controllers. We will try to fix it, if there will be enough time. In that case we might change our application architecture.
+    
+  - "Commit controller"
+  - "Repository controller"
+  - "User controller"
+    
+Servicing classes:
+
+  - "Clock"
+  | Going clock with "add some time" feature.
+
+Attention! Program has a lot of unnecessary chunks of code that will be removed later!
+
+
