@@ -1,40 +1,24 @@
 package gui.repository_page;
 
+import models.entities.Repository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-
 public class CodePanel extends JPanel implements ActionListener {
 
-    public CodePanel() {
+    public CodePanel(Repository repository) {
         setBorder(BorderFactory.createEtchedBorder());
 
-        FileSystemModel systemTree = new FileSystemModel(new File("user_files/Repository1"));
-        JScrollPane scrollPane = new JScrollPane(systemTree);
-        scrollPane.setPreferredSize(new Dimension(700, 600));
+        FileSystemModel systemTree = new FileSystemModel(new File("user_files/repository" + repository.getId()));
 
-        JTabbedPane tabbedPane = new JTabbedPane();
-        JPanel tabPanel1 = new JPanel();
-        tabbedPane.setPreferredSize(new Dimension(700, 600));
-        tabPanel1.add(scrollPane);
-
-        JPanel tabPanel2 = new JPanel();
-        JLabel tabPanel2Label = new JLabel("Text2");
-        tabPanel2Label.setHorizontalAlignment(JLabel.CENTER);
-        tabPanel2.add(tabPanel2Label);
-
-        tabbedPane.addTab("Code", null, tabPanel1);
-        tabbedPane.addTab("Two", null, tabPanel2);
-
-        setLayout(new GridLayout(1, 1));
-
-
-        add(tabbedPane);
-
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+        Dimension d = systemTree.getPreferredSize();
+        d.width = 800;
+        systemTree.setPreferredSize(d);
+        add(systemTree);
     }
 
     @Override

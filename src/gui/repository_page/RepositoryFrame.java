@@ -1,27 +1,66 @@
 package gui.repository_page;
 
+import gui.ClockPanel;
+import gui.home_page.ActivitiesPanel;
+import gui.home_page.RepositoriesPanel;
+import gui.home_page.UserInfoPanel;
+import models.entities.Repository;
+import services.Clock;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class RepositoryFrame extends JFrame {
-    private JLabel label;
-    private JPanel panel;
-    private JComboBox comboBox;
-    private CodePanel home;
+    private JPanel outerPanel, topPanel, contentPanel;
+    private ClockPanel clockPanel;
+    private UserInfoPanel infoPanel;
+    private CodePanel codePanel;
+    private CommitsPanel commitsPanel;
 
-    public RepositoryFrame(String selectedUser) {
+
+    public RepositoryFrame(String selectedUser, Repository repository, Clock cl) {
         super("ActivitiesPanel page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1000, 800));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new BorderLayout());
 
-        label = new JLabel(selectedUser + ", welcome to the home page!");
-        label.setPreferredSize(new Dimension(800, 200));
-        add(label, BorderLayout.NORTH);
+        // Outer block
+        outerPanel = new JPanel();
+        // Inner blocks
+        topPanel = new JPanel();
+        contentPanel = new JPanel();
+        // Inner panels
+        infoPanel = new UserInfoPanel(selectedUser);
+        clockPanel = new ClockPanel(cl);
+        codePanel = new CodePanel(repository);
+        commitsPanel = new CommitsPanel();
 
-        home = new CodePanel();
-        add(home, BorderLayout.CENTER);
+        infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        clockPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        //codePanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        //commitsPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+
+        // Outer blocks
+        outerPanel.setLayout(new BorderLayout());
+        // Top block
+        topPanel.setLayout(new GridLayout(1, 2));
+
+        topPanel.add(infoPanel);
+        topPanel.add(clockPanel);
+
+        // Content block
+        JTabbedPane tabbedPane = new JTabbedPane();
+
+        tabbedPane.addTab("Code", null, codePanel);
+        tabbedPane.addTab("Commits", null, commitsPanel);
+
+        contentPanel.add(tabbedPane);
+
+        outerPanel.add(topPanel, BorderLayout.NORTH);
+        outerPanel.add(contentPanel, BorderLayout.CENTER);
+
+        add(new JScrollPane(outerPanel));
 
         setVisible(true);
     }

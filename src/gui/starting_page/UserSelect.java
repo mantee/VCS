@@ -22,7 +22,6 @@ public class UserSelect extends JPanel implements ActionListener {
 
     StartingFrame outerFrame;
 
-
     public UserSelect(StartingFrame outerFrame, Clock cl) throws Exception {
         this.cl = cl;
         this.outerFrame = outerFrame;

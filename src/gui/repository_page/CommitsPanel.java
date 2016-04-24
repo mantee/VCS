@@ -8,18 +8,9 @@ import java.awt.event.ActionListener;
 public class CommitsPanel extends JPanel implements ActionListener {
 
     public CommitsPanel() {
-        setBorder(BorderFactory.createEtchedBorder());
+        //setBorder(BorderFactory.createEtchedBorder());
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(700, 600));
-
-        JPanel panel = new JPanel();
-        scrollPane.add(panel);
-        setLayout(new GridLayout(1, 1));
-
-        add(scrollPane);
-
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+        add(new JLabel("Commits"));
     }
 
     @Override
