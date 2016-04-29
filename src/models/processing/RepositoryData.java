@@ -51,19 +51,4 @@ public class RepositoryData {
             return null;
         }
     }
-
-    public static void main(String[] args) throws Exception {
-        RepositoryData data = new RepositoryData();
-        ArrayList<Repository> allRepositories = data.getAllRepositories();
-
-        for (int i = 0; i < allRepositories.size(); i++)
-        {
-            System.out.println(allRepositories.get(i));
-        }
-
-        System.out.print("\n");
-        System.out.println(data.findRepository(5));
-        System.out.println(data.findRepository(1));
-        System.out.println(data.findRepository(3));
-    }
 }

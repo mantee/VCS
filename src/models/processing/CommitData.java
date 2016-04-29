@@ -23,9 +23,8 @@ public class CommitData {
             repository.setId(Integer.parseInt(procedData[0]));
             repository.setRepository(rData.findRepository(Integer.parseInt(procedData[1])));
             repository.setOwner(uData.findUser(Integer.parseInt(procedData[2])));
-            repository.setTitle(procedData[3]);
-            repository.setMessage(procedData[4]);
-            repository.setDate(procedData[5]);
+            repository.setMessage(procedData[3]);
+            repository.setDate(procedData[4]);
 
             repositories.add(repository);
         }
@@ -33,9 +32,9 @@ public class CommitData {
         return repositories;
     }
 
-    public Commit findCommit(int id, String filename) throws FileNotFoundException {
+    public Commit findCommit(int id, String repoName) throws FileNotFoundException {
         CommitData repositoriesData = new CommitData();
-        ArrayList<Commit> repositories = repositoriesData.getAllCommits(filename);
+        ArrayList<Commit> repositories = repositoriesData.getAllCommits(repoName);
 
         boolean exist = false;
 
@@ -53,20 +52,5 @@ public class CommitData {
         } else {
             return null;
         }
-    }
-
-    public static void main(String[] args) throws Exception {
-        CommitData data = new CommitData();
-        ArrayList<Commit> allCommits = data.getAllCommits("repository1");
-
-        for (int i = 0; i < allCommits.size(); i++)
-        {
-            System.out.println(allCommits.get(i));
-        }
-
-        System.out.print("\n");
-        System.out.println(data.findCommit(5, "repository1"));
-        System.out.println(data.findCommit(1, "repository1"));
-        System.out.println(data.findCommit(3, "repository1"));
     }
 }

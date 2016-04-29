@@ -13,6 +13,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import gui.ClockPanel;
+import gui.new_repository_page.NewRepositoryFrame;
+import models.entities.User;
 import services.Clock;
 public class HomeFrame extends JFrame implements ActionListener {
     private JPanel outerPanel, topPanel, contentPanel;
@@ -21,7 +23,7 @@ public class HomeFrame extends JFrame implements ActionListener {
     private ClockPanel clockPanel;
     private UserInfoPanel infoPanel;
 
-    public HomeFrame(String selectedUser, final Clock cl) throws IOException, ParseException {
+    public HomeFrame(final User user, final Clock cl) throws IOException, ParseException {
         super("Home page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1000, 800));
@@ -33,8 +35,14 @@ public class HomeFrame extends JFrame implements ActionListener {
         topPanel = new JPanel();
         contentPanel = new JPanel();
         // Inner panels
-        infoPanel = new UserInfoPanel(selectedUser);
+        infoPanel = new UserInfoPanel(user.getFirstname() + user.getLastname());
         clockPanel = new ClockPanel(cl);
+        JButton newRepositoryButton = new JButton(new AbstractAction("New repository") {
+            public void actionPerformed(ActionEvent e) {
+                newRepositoryOpen(user, cl);
+            }
+        });
+        clockPanel.add(newRepositoryButton, FlowLayout.LEFT);
         activitiesPanel = new ActivitiesPanel();
         repositoriesPanel = new RepositoriesPanel(this, cl);
 
@@ -63,6 +71,13 @@ public class HomeFrame extends JFrame implements ActionListener {
         add(new JScrollPane(outerPanel));
         
         setVisible(true);
+    }
+
+    void newRepositoryOpen(final User user, final Clock cl){
+        new NewRepositoryFrame(user, cl);
+
+        //this.setVisible(false);
+        //this.dispose();
     }
 
     @Override

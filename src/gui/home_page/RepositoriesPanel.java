@@ -32,8 +32,8 @@ public class RepositoriesPanel extends JPanel {
 
         for (int i = 0; i < repositories.size(); i++) {
             JPanel repositoryInfoBlock = new JPanel();
-            final Repository repository;
-            repository = repositories.get(i);
+            repositoryInfoBlock.setLayout(new BorderLayout());
+            final Repository repository = repositories.get(i);
 
             JButton openButton = new JButton(new AbstractAction("Open") {
                 public void actionPerformed(ActionEvent e) {
@@ -60,20 +60,25 @@ public class RepositoriesPanel extends JPanel {
                 }
             });
 
-            JLabel label = new JLabel(repository.getTitle() + " / " + repository.getDateCreated());
-            label.setFont(new Font("Sans Serif", Font.PLAIN, 12));
-            Dimension d = repositoryInfoBlock.getSize();
-            d.height = 20;
-            repositoryInfoBlock.setSize(d);
-            repositoryInfoBlock.add(label);
+            JLabel label = new JLabel(repository.getTitle());
+            label.setFont(new Font("Sans Serif", Font.PLAIN, 18));
 
-            repositoryInfoBlock.add(openButton);
-            //openButton.addActionListener(this);
-            repositoryInfoBlock.add(deleteButton);
-            //deleteButton.addActionListener(this);
+            JPanel leftPanel = new JPanel();
+            leftPanel.add(label);
+
+            JPanel rightPanel = new JPanel();
+            rightPanel.add(new JLabel(repository.getDateCreated()));
+            rightPanel.add(openButton);
+            rightPanel.add(deleteButton);
+
+            repositoryInfoBlock.add(leftPanel, BorderLayout.CENTER);
+            repositoryInfoBlock.add(rightPanel, BorderLayout.EAST);
 
             repositoryInfoBlock.setBorder(BorderFactory.createMatteBorder(
                 1, 1, 1, 1, Color.red));
+            repositoryInfoBlock.setBorder(BorderFactory.createEtchedBorder());
+            add(repositoryInfoBlock);
+            repositoryInfoBlock.setBorder(BorderFactory.createEtchedBorder());
             add(repositoryInfoBlock);
         }
 

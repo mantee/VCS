@@ -49,18 +49,4 @@ public class UserData {
             return null;
         }
     }
-
-    public static void main(String[] args) throws Exception {
-        UserData data = new UserData();
-        ArrayList<User> allUsers = data.getAllUsers();
-
-        for (int i = 0; i < allUsers.size(); i++)
-        {
-            System.out.println(allUsers.get(i));
-        }
-
-        System.out.print("\n");
-        System.out.println(data.findUser(5));
-        System.out.println(data.findUser(3));
-    }
 }

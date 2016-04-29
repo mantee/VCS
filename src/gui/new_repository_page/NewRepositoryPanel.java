@@ -1,25 +1,52 @@
 package gui.new_repository_page;
 
+import controllers.RepositoryController;
+import models.entities.User;
+import services.Clock;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.ParseException;
 
 public class NewRepositoryPanel extends JPanel implements ActionListener {
 
-    public NewRepositoryPanel() {
-        setBorder(BorderFactory.createEtchedBorder());
+    public NewRepositoryPanel(final User user, final Clock cl) {
 
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(700, 600));
+        JLabel title = new JLabel("Title");
+        final JTextField textField = new JTextField(25);
+        JButton createButton = new JButton(new AbstractAction("Create") {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    RepositoryController repositoryController = new RepositoryController();
+                    repositoryController.createRepository(user, textField.getText(), cl);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
 
-        JPanel panel = new JPanel();
-        scrollPane.add(panel);
-        setLayout(new GridLayout(1, 1));
+            }
+        });
 
-        add(scrollPane);
+        JButton cancelButton = new JButton("Cancel");
 
-        setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel form = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        form.add(title);
+        form.add(textField);
+        buttons.add(createButton);
+        buttons.add(cancelButton);
+
+        add(form);
+        add(buttons);
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 
     @Override

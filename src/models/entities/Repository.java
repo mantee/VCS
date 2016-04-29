@@ -1,5 +1,8 @@
 package models.entities;
 
+import models.processing.CommitData;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Repository {
@@ -25,7 +28,9 @@ public class Repository {
         this.title = title;
     }
 
-    public ArrayList<Commit> getCommits() {
+    public ArrayList<Commit> getCommits() throws FileNotFoundException {
+        CommitData cd = new CommitData();
+        setCommits(cd.getAllCommits("repository" + this.id));
         return commits;
     }
 

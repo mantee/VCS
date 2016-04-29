@@ -9,6 +9,7 @@ import services.Clock;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class RepositoryFrame extends JFrame {
     private JPanel outerPanel, topPanel, contentPanel;
@@ -18,7 +19,7 @@ public class RepositoryFrame extends JFrame {
     private CommitsPanel commitsPanel;
 
 
-    public RepositoryFrame(String selectedUser, Repository repository, Clock cl) {
+    public RepositoryFrame(String selectedUser, Repository repository, Clock cl) throws FileNotFoundException {
         super("ActivitiesPanel page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(1000, 800));
@@ -34,12 +35,12 @@ public class RepositoryFrame extends JFrame {
         infoPanel = new UserInfoPanel(selectedUser);
         clockPanel = new ClockPanel(cl);
         codePanel = new CodePanel(repository);
-        commitsPanel = new CommitsPanel();
+        commitsPanel = new CommitsPanel(repository);
 
         infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         clockPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        //codePanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
-        //commitsPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
+        //codePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        commitsPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Outer blocks
         outerPanel.setLayout(new BorderLayout());

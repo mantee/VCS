@@ -11,12 +11,13 @@ import services.Clock;
 import controllers.UserController;
 import gui.home_page.HomeFrame;
 import models.entities.User;
+import models.entities.ComboItem;
 
 public class UserSelect extends JPanel implements ActionListener {
     private Clock cl;
-    private JButton okButton;
     private JLabel label;
     private JComboBox comboBox;
+    private User selectedUser = null;
 
     private UserSelectListener textListener;
 
@@ -37,13 +38,34 @@ public class UserSelect extends JPanel implements ActionListener {
         comboBox = new JComboBox();
         final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
-        for(User user : users.getAllUsers())
+        for(final User user : users.getAllUsers())
         {
-            comboBoxModel.addElement(user.getFirstname() + " " + user.getLastname());
-        }
-        comboBox.setModel(comboBoxModel);
+            if (selectedUser == null) {
+                selectedUser = user;
+            }
 
-        okButton = new JButton("Ok");
+            comboBox.addItem(new ComboItem(user.getFirstname() + " " + user.getLastname(), user));
+        }
+
+        comboBox.addActionListener(new ActionListener () {
+            public void actionPerformed(ActionEvent e) {
+                Object userObj = comboBox.getSelectedItem();
+                User user = ((ComboItem)userObj).getComboUser();
+                selectedUser = user;
+            }
+        });
+
+        JButton okButton = new JButton(new AbstractAction("Ok") {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    clickedOk(selectedUser);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         add(label);
         add(comboBox);
@@ -61,25 +83,10 @@ public class UserSelect extends JPanel implements ActionListener {
     private JButton dialogButton;
     @Override
     public void actionPerformed(ActionEvent e) {
-        String selectedUser = comboBox.getSelectedItem().toString();
 
-        JButton clicked = (JButton)e.getSource();
-
-        if(clicked == okButton) {
-            if(textListener != null) {
-                textListener.okEventOccured();
-            }
-            try {
-                clickedOk(selectedUser);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            } catch (ParseException e1) {
-                e1.printStackTrace();
-            }
-        }
     }
 
-    public void clickedOk(String selectedUser) throws IOException, ParseException {
+    public void clickedOk(User selectedUser) throws IOException, ParseException {
         new HomeFrame(selectedUser, cl);
 
         outerFrame.setVisible(false);

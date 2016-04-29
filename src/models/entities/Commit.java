@@ -4,7 +4,6 @@ public class Commit {
     private int id;
     private Repository repository;
     private User owner;
-    private String title;
     private String message;
     private String date;
 
@@ -32,14 +31,6 @@ public class Commit {
         this.owner = owner;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -62,7 +53,6 @@ public class Commit {
             "id=" + id +
             ", repository=" + repository +
             ", owner=" + owner +
-            ", title='" + title + '\'' +
             ", message='" + message + '\'' +
             ", date='" + date + '\'' +
             '}';
