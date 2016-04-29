@@ -25,7 +25,7 @@ public class NewRepositoryFrame extends JFrame {
         contentPanel = new JPanel();
         // Inner panels
         clockPanel = new ClockPanel(cl);
-        newRepositoryPanel = new NewRepositoryPanel(user, cl);
+        newRepositoryPanel = new NewRepositoryPanel(user, cl, this);
 
         clockPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         newRepositoryPanel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));

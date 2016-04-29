@@ -76,8 +76,8 @@ public class HomeFrame extends JFrame implements ActionListener {
     void newRepositoryOpen(final User user, final Clock cl){
         new NewRepositoryFrame(user, cl);
 
-        //this.setVisible(false);
-        //this.dispose();
+        this.setVisible(false);
+        this.dispose();
     }
 
     @Override

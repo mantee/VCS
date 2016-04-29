@@ -36,7 +36,6 @@ public class UserSelect extends JPanel implements ActionListener {
         label.setText("Select user:");
 
         comboBox = new JComboBox();
-        final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel();
 
         for(final User user : users.getAllUsers())
         {
