@@ -7,9 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class CommitData {
-    public ArrayList<Commit> getAllCommits(String repositoryName) throws FileNotFoundException {
+    public ArrayList<Commit> getAllCommits(Integer id) throws FileNotFoundException {
         FileProcess rd = new FileProcess();
-        ArrayList<String> data = rd.readData("db/repositories/" + repositoryName +"/commits.dat");
+        ArrayList<String> data = rd.readData("db/repositories/repository" + id +"/commits.dat");
         ArrayList<Commit> repositories= new ArrayList<Commit>();
 
         for (String aData : data) {
@@ -32,9 +32,9 @@ public class CommitData {
         return repositories;
     }
 
-    public Commit findCommit(int id, String repoName) throws FileNotFoundException {
+    public Commit findCommit(int id, Integer repoId) throws FileNotFoundException {
         CommitData repositoriesData = new CommitData();
-        ArrayList<Commit> repositories = repositoriesData.getAllCommits(repoName);
+        ArrayList<Commit> repositories = repositoriesData.getAllCommits(repoId);
 
         boolean exist = false;
 

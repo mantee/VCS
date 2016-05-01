@@ -10,19 +10,14 @@ import services.Clock;
 
 public class StartingFrame extends JFrame {
     private JLabel label;
-    private JPanel panel;
-    private JComboBox comboBox;
     private UserSelect uSelect;
-    private CodePanel home;
 
     public StartingFrame(Clock cl) throws Exception {
-
         super("User select");
-        System.out.println(cl.getCurrentDateString());
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(500, 300));
         setLayout(new BorderLayout());
+
         uSelect = new UserSelect(this, cl);
         label = new JLabel("Welcome to our VCS");
         label.setHorizontalAlignment(JLabel.CENTER);

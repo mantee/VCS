@@ -2,6 +2,7 @@ package gui.new_repository_page;
 
 import controllers.RepositoryController;
 import gui.home_page.HomeFrame;
+import gui.home_page.RepositoriesPanel;
 import models.entities.User;
 import services.Clock;
 
@@ -35,11 +36,23 @@ public class NewRepositoryPanel extends JPanel implements ActionListener {
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
-
             }
         });
 
-        JButton cancelButton = new JButton("Cancel");
+        JButton cancelButton = new JButton(new AbstractAction("Cancel") {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new HomeFrame(user, cl);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+
+                outerFrame.setVisible(false);
+                outerFrame.dispose();
+            }
+        });
 
         JPanel form = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.RIGHT));

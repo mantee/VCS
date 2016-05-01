@@ -6,11 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import gui.ClockPanel;
 import gui.new_repository_page.NewRepositoryFrame;
@@ -35,7 +30,7 @@ public class HomeFrame extends JFrame implements ActionListener {
         topPanel = new JPanel();
         contentPanel = new JPanel();
         // Inner panels
-        infoPanel = new UserInfoPanel(user.getFirstname() + user.getLastname());
+        infoPanel = new UserInfoPanel(user);
         clockPanel = new ClockPanel(cl);
         JButton newRepositoryButton = new JButton(new AbstractAction("New repository") {
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +39,7 @@ public class HomeFrame extends JFrame implements ActionListener {
         });
         clockPanel.add(newRepositoryButton, FlowLayout.LEFT);
         activitiesPanel = new ActivitiesPanel();
-        repositoriesPanel = new RepositoriesPanel(this, cl);
+        repositoriesPanel = new RepositoriesPanel(user, this, cl);
 
         infoPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         clockPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

@@ -3,6 +3,7 @@ package gui.home_page;
 import controllers.RepositoryController;
 import gui.repository_page.RepositoryFrame;
 import models.entities.Repository;
+import models.entities.User;
 import services.Clock;
 
 import javax.swing.*;
@@ -17,10 +18,9 @@ public class RepositoriesPanel extends JPanel {
 
     private JLabel titleLabel = new JLabel("My repositories");
     private RepositoryController repositoryController = new RepositoryController();
-    private RepositoriesPanelListener repositoriesPanelListener;
     HomeFrame outerFrame;
 
-    public RepositoriesPanel(HomeFrame outerFrame, final Clock cl) throws ParseException, IOException {
+    public RepositoriesPanel(final User user, HomeFrame outerFrame, final Clock cl) throws ParseException, IOException {
         this.outerFrame = outerFrame;
         titleLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
         titleLabel.setBorder(BorderFactory.createMatteBorder(
@@ -39,7 +39,7 @@ public class RepositoriesPanel extends JPanel {
                 public void actionPerformed(ActionEvent e) {
                     //do stuff here
                     try {
-                        clickedOpen(repository, cl);
+                        clickedOpen(user, repository, cl);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     } catch (ParseException e1) {
@@ -85,12 +85,8 @@ public class RepositoriesPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
     }
 
-    public void setRepositoriesPanelListener(RepositoriesPanelListener listener) {
-        this.repositoriesPanelListener = listener;
-    }
-
-    public void clickedOpen(Repository repository, Clock cl) throws IOException, ParseException {
-        new RepositoryFrame("Useris", repository, cl);
+    public void clickedOpen(final User user, Repository repository, Clock cl) throws IOException, ParseException {
+        new RepositoryFrame(user, repository, cl);
 
         outerFrame.setVisible(false);
         outerFrame.dispose();
@@ -98,11 +94,11 @@ public class RepositoriesPanel extends JPanel {
 
     public void clickedDelete() throws IOException, ParseException {
         int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure that you want to delete this repository?","Warning",dialogButton);
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Are you sure you want to delete this repository?","Warning",dialogButton);
         if (dialogResult == JOptionPane.YES_OPTION) {
-            System.out.println("Yes");
+            // Do something if "Yes"
         } else {
-            System.out.println("No");
+            // Do something if "No"
         }
     }
 }

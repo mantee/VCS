@@ -1,6 +1,7 @@
 package gui.home_page;
 
 import gui.starting_page.UserSelect;
+import models.entities.User;
 import services.Clock;
 
 import javax.swing.*;
@@ -10,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class UserInfoPanel extends JPanel implements ActionListener {
 
-    public UserInfoPanel(String selectedUser) {
-        add(new JLabel(selectedUser));
+    public UserInfoPanel(User user) {
+        add(new JLabel(user.getFirstname()));
 
         setLayout(new FlowLayout(FlowLayout.LEFT));
 

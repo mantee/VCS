@@ -17,7 +17,6 @@ class FileSystemModel extends JPanel {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) e.getPath().getLastPathComponent();
-                System.out.println("You selected " + node);
             }
         });
         JScrollPane scrollpane = new JScrollPane();

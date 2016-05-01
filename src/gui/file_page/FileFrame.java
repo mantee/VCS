@@ -5,8 +5,6 @@ import java.awt.*;
 
 public class FileFrame extends JFrame {
     private JLabel label;
-    private JPanel panel;
-    private JComboBox comboBox;
     private FilePanel home;
 
     public FileFrame(String selectedUser) {

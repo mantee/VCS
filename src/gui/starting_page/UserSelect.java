@@ -19,17 +19,12 @@ public class UserSelect extends JPanel implements ActionListener {
     private JComboBox comboBox;
     private User selectedUser = null;
 
-    private UserSelectListener textListener;
-
     StartingFrame outerFrame;
 
     public UserSelect(StartingFrame outerFrame, Clock cl) throws Exception {
         this.cl = cl;
         this.outerFrame = outerFrame;
         UserController users = new UserController();
-
-        cl.addOneDay();
-        System.out.println(cl.getCurrentDateString());
 
         setBorder(BorderFactory.createEtchedBorder());
         label = new JLabel();
@@ -75,11 +70,6 @@ public class UserSelect extends JPanel implements ActionListener {
         setLayout(new FlowLayout(FlowLayout.LEFT));
     }
 
-    public void setUserSelectListener(UserSelectListener listener) {
-        this.textListener = listener;
-    }
-
-    private JButton dialogButton;
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -15,14 +15,6 @@ public class UserController {
     }
 
     public ArrayList<User> getAllUsers() throws IOException {
-        System.out.println("ok");
-
-
-        //System.out.println("!!!" + ok);
-
-        //System.out.println(getCurrentDate());
-        //addOneDay();
-        //System.out.println(getCurrentDate());
         return db.getAllUsers();
     }
 

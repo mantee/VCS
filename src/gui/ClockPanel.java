@@ -10,14 +10,12 @@ import java.awt.event.ActionListener;
 public class ClockPanel extends JPanel implements ActionListener {
 
     private JLabel label = new JLabel();
-    private Clock cl;
 
     public ClockPanel(Clock cl) {
         add(label);
         cl.displayDateTime(cl, label);
 
         setLayout(new FlowLayout(FlowLayout.RIGHT));
-
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Repository {
 
     public ArrayList<Commit> getCommits() throws FileNotFoundException {
         CommitData cd = new CommitData();
-        setCommits(cd.getAllCommits("repository" + this.id));
+        setCommits(cd.getAllCommits(this.id));
         return commits;
     }
 

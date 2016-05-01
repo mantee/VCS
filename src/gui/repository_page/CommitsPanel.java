@@ -13,21 +13,11 @@ import java.util.ArrayList;
 public class CommitsPanel extends JPanel implements ActionListener {
 
     public CommitsPanel(Repository repository) throws FileNotFoundException {
-        //setBorder(BorderFactory.createEtchedBorder());
-
-        //ArrayList<Commit> commits = repository.getCommits();
-        //System.out.println(commits.size());
-
         ArrayList<Commit> commits = repository.getCommits();
         for (int i = 0; i < commits.size(); i++) {
             JPanel commitInfoBlock = new JPanel();
             commitInfoBlock.setLayout(new BorderLayout());
             final Commit commit = commits.get(i);
-
-            JButton openButton = new JButton(new AbstractAction("Open") {
-                public void actionPerformed(ActionEvent e) {
-                }
-            });
 
             JLabel label = new JLabel(commit.getMessage());
             label.setFont(new Font("Sans Serif", Font.PLAIN, 12));
@@ -37,7 +27,23 @@ public class CommitsPanel extends JPanel implements ActionListener {
 
             JPanel rightPanel = new JPanel();
             rightPanel.add(new JLabel(commit.getDate()));
-            rightPanel.add(openButton);
+
+            if (commits.get(commits.size()-1).getId() == commit.getId()) {
+                JButton openButton = new JButton(new AbstractAction("Open") {
+                    public void actionPerformed(ActionEvent e) {
+                    }
+                });
+                rightPanel.add(openButton);
+            }
+
+            if (commits.get(commits.size()-1).getId() - 1 == commit.getId())
+            {
+                JButton resetButton = new JButton(new AbstractAction("Reset") {
+                    public void actionPerformed(ActionEvent e) {
+                    }
+                });
+                rightPanel.add(resetButton);
+            }
 
             commitInfoBlock.add(leftPanel, BorderLayout.CENTER);
             commitInfoBlock.add(rightPanel, BorderLayout.EAST);

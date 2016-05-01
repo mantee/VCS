@@ -1,13 +1,11 @@
 package gui.new_repository_page;
 
 import gui.ClockPanel;
-import gui.home_page.ActivitiesPanel;
 import models.entities.User;
 import services.Clock;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class NewRepositoryFrame extends JFrame {
     private JPanel outerPanel, topPanel, contentPanel;
@@ -17,6 +15,7 @@ public class NewRepositoryFrame extends JFrame {
     public NewRepositoryFrame(User user, Clock cl) {
         super("Home page");
         setSize(new Dimension(500, 200));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Outer block
         outerPanel = new JPanel();
